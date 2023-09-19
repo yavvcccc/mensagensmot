@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frases Motivacionais</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-purple-300 via-pink-200 to-yellow-200 min-h-screen flex flex-col items-center justify-center">
+  <div class="bg-white p-8 rounded-md shadow-lg text-center w-full max-w-md">
+    <h1 class="text-4xl font-bold mb-6 text-gray-800">Frases Motivacionais</h1>
+    <p id="frase" class="text-2xl text-gray-700 mb-8"></p>
+    <button id="refreshFrase" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Atualizar Frase</button>
+  </div>
+
+  <script>
+    const frases = [
+          "Acredite em si mesmo e você conquistará o mundo.",
+    "Não espere o futuro mudar a sua vida, porque o futuro é a consequência do presente.",
+    "Nunca desista das coisas que fazem você sorrir.",
+    "Tudo é possível. O impossível apenas demora mais.",
+    "Você nunca falha até que pare de tentar.",
+    "A perseverança é o segredo para o sucesso.",
+    "Grandes desafios levam a grandes conquistas.",
+    "Aprenda com os erros e siga em frente.",
+    "Cada dia é uma oportunidade para ser melhor.",
+    "O sucesso começa com um sonho e uma dose de coragem.",
+    "Nada é impossível para aquele que persiste.",
+    "A confiança em si mesmo é a chave para o sucesso.",
+    "A motivação é o que te faz começar. O hábito é o que te faz continuar.",
+    "A jornada de mil milhas começa com um único passo.",
+    "A paciência é amarga, mas seu fruto é doce.",
+    "A única limitação é a que você coloca em sua mente.",
+    "O medo é o assassino da mente. Supere-o.",
+    "O sucesso não é final, o fracasso não é fatal: é a coragem de continuar que conta.",
+    "Não importa o quão devagar você vá, desde que você não pare.",
+    "O fracasso é o trampolim para o sucesso.",
+    "Acredite que você pode e você está a meio caminho de lá.",
+    "Você é mais corajoso do que pensa, mais forte do que parece e mais inteligente do que acredita.",
+    "As dificuldades preparam pessoas comuns para destinos extraordinários.",
+    "Você não pode cruzar o oceano até que tenha coragem de perder de vista a costa.",
+    "A chave para o sucesso é começar antes que você esteja pronto.",
+    "A motivação é o que te faz começar. O hábito é o que te faz continuar.",
+    "Acredite em seus sonhos e eles podem se tornar realidade.",
+    "A vida é 10% do que nos acontece e 90% de como reagimos a isso.",
+    "O sucesso não é a chave para a felicidade. A felicidade é a chave para o sucesso. Se você ama o que faz, você será bem-sucedido.",
+    "O fracasso é o condimento que dá sabor ao sucesso.",
+    "A persistência é o caminho do êxito.",
+    "Lembre-se: você é mais forte do que pensa e mais capaz do que imagina.",
+    "A chave é começar antes de você estar pronto.",
+    "Você nunca é velho demais para definir outra meta ou sonhar um novo sonho.",
+    "Apenas mantenha seus olhos nas estrelas e seus pés no chão.",
+    "Não importa o quão devagar você vá, desde que não pare.",
+    "Quando você quer algo, todo o universo conspira para que você realize seu desejo.",
+    "A vida é curta, sorva-a. A raiva é ruim, jogue-a fora. O medo é um lixo, jogue-o fora. O amor é raro, agarre-o. Os tempos passam rapidamente, aproveite cada momento.",
+    "O sucesso não consiste em não cair, mas em levantar-se todas as vezes que você cair.",
+    "Seja a mudança que você deseja ver no mundo.",
+    "O sucesso é ir de fracasso em fracasso sem perder entusiasmo.",
+    "O primeiro passo rumo ao sucesso é dado quando você se recusa a ser um refém do ambiente em que se encontra.",
+    "Você não pode vencer todos os dias, mas pode aprender algo com todos os dias.",
+    "Não é o que nos acontece que nos define, mas o que fazemos com isso.",
+    "O fracasso é a oportunidade de começar de novo, só que desta vez de maneira mais inteligente.",
+    "Nunca é tarde demais para ser o que você poderia ter sido.",
+    "O que você faz hoje pode melhorar todos os seus amanhãs.",
+    "Se você quer realizar algo, o trabalho árduo é essencial.",
+    "Seja paciente com você mesmo. A autodúvida é uma das maiores estradas para o fracasso.",
+    "Você é responsável pela sua própria felicidade.",
+    "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
+    "Acredite em você mesmo e tudo será possível.",
+    "O sucesso é o resultado de consistência, esforço e dedicação contínua.",
+    "Aja como se o que você faz fizesse diferença. Isso faz.",
+    "O sucesso não é para os fracos de coração; requer dedicação, paixão e coragem.",
+    "A vida é cheia de obstáculos, mas cada obstáculo é uma oportunidade para crescer.",
+    "O sucesso não é medido pelo quanto você realiza, mas pelo quanto você supera os obstáculos.",
+    "A confiança é a chave para o sucesso. Se você acredita em si mesmo, pode alcançar qualquer coisa.",
+    "O sucesso é o resultado de um trabalho árduo constante e de nunca desistir.",
+    "A motivação é o que te faz começar. O hábito é o que te faz continuar.",
+    "Acredite em seus sonhos e eles podem se tornar realidade.",
+    "A vida é 10% do que nos acontece e 90% de como reagimos a isso.",
+    "O sucesso não é a chave para a felicidade. A felicidade é a chave para o sucesso. Se você ama o que faz, você será bem-sucedido.",
+    "O fracasso é o condimento que dá sabor ao sucesso.",
+    "A persistência é o caminho do êxito.",
+    "Lembre-se: você é mais forte do que pensa e mais capaz do que imagina.",
+    "A chave é começar antes de você estar pronto.",
+    "Você nunca é velho demais para definir outra meta ou sonhar um novo sonho.",
+    "Apenas mantenha seus olhos nas estrelas e seus pés no chão.",
+    "Não importa o quão devagar você vá, desde que não pare.",
+    "Quando você quer algo, todo o universo conspira para que você realize seu desejo.",
+    "A vida é curta, sorva-a. A raiva é ruim, jogue-a fora. O medo é um lixo, jogue-o fora. O amor é raro, agarre-o. Os tempos passam rapidamente, aproveite cada momento.",
+    "O sucesso não consiste em não cair, mas em levantar-se todas as vezes que você cair.",
+    "Seja a mudança que você deseja ver no mundo.",
+    "O sucesso é ir de fracasso em fracasso sem perder entusiasmo.",
+    "O primeiro passo rumo ao sucesso é dado quando você se recusa a ser um refém do ambiente em que se encontra.",
+    "Você não pode vencer todos os dias, mas pode aprender algo com todos os dias.",
+    "Não é o que nos acontece que nos define, mas o que fazemos com isso.",
+    "O fracasso é a oportunidade de começar de novo, só que desta vez de maneira mais inteligente.",
+    "Nunca é tarde demais para ser o que você poderia ter sido.",
+    "O que você faz hoje pode melhorar todos os seus amanhãs.",
+    "Se você quer realizar algo, o trabalho árduo é essencial.",
+    "Seja paciente com você mesmo. A autodúvida é uma das maiores estradas para o fracasso.",
+    "Você é responsável pela sua própria felicidade.",
+    "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
+    "Acredite em você mesmo e tudo será possível.",
+    "O sucesso é o resultado de consistência, esforço e dedicação contínua.",
+    "Aja como se o que você faz fizesse diferença. Isso faz.",
+    "O sucesso não é para os fracos de coração; requer dedicação, paixão e coragem.",
+    "A vida é cheia de obstáculos, mas cada obstáculo é uma oportunidade para crescer.",
+    "O sucesso não é medido pelo quanto você realiza, mas pelo quanto você supera os obstáculos.",
+    "A confiança é a chave para o sucesso. Se você acredita em si mesmo, pode alcançar qualquer coisa.",
+    "O sucesso é o resultado de um trabalho árduo constante e de nunca desistir.",
+    "Acredite em seus sonhos e eles podem se tornar realidade.",
+    "A vida é 10% do que nos acontece e 90% de como reagimos a isso.",
+    "O sucesso não é a chave para a felicidade. A felicidade é a chave para o sucesso. Se você ama o que faz, você será bem-sucedido.",
+    "O fracasso é o condimento que dá sabor ao sucesso.",
+    "A persistência é o caminho do êxito.",
+    "Lembre-se: você é mais forte do que pensa e mais capaz do que imagina.",
+    "A chave é começar antes de você estar pronto.",
+    "Você nunca é velho demais para definir outra meta ou sonhar um novo sonho.",
+    "Apenas mantenha seus olhos nas estrelas e seus pés no chão.",
+    "Não importa o quão devagar você vá, desde que não pare.",
+    "Quando você quer algo, todo o universo conspira para que você realize seu desejo.",
+    "A vida é curta, sorva-a. A raiva é ruim, jogue-a fora. O medo é um lixo, jogue-o fora. O amor é raro, agarre-o. Os tempos passam rapidamente, aproveite cada momento.",
+    "O sucesso não consiste em não cair, mas em levantar-se todas as vezes que você cair.",
+    "Seja a mudança que você deseja ver no mundo.",
+    "O sucesso é ir de fracasso em fracasso sem perder entusiasmo.",
+    "O primeiro passo rumo ao sucesso é dado quando você se recusa a ser um refém do ambiente em que se encontra.",
+    "Você não pode vencer todos os dias, mas pode aprender algo com todos os dias.",
+    "Não é o que nos acontece que nos define, mas o que fazemos com isso.",
+    "O fracasso é a oportunidade de começar de novo, só que desta vez de maneira mais inteligente.",
+    "Nunca é tarde demais para ser o que você poderia ter sido.",
+    "O que você faz hoje pode melhorar todos os seus amanhãs.",
+    ];
+
+    const fraseElement = document.getElementById('frase');
+    const refreshFraseButton = document.getElementById('refreshFrase');
+
+    function atualizarFrase() {
+      const randomIndex = Math.floor(Math.random() * frases.length);
+      fraseElement.textContent = frases[randomIndex];
+    }
+
+    refreshFraseButton.addEventListener('click', atualizarFrase);
+    atualizarFrase();
+  </script>
+</body>
+</html>
